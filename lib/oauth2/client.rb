@@ -137,7 +137,7 @@ module OAuth2
       end
       Rails.logger.info "[oauth2] requesting token from #{token_url}"
       response = request(options[:token_method], token_url, opts)
-      Rails.logger.info "[oauth2] get_token response #{response}"
+      Rails.logger.info "[oauth2] get_token response #{response.inspect}"
       error = Error.new(response)
       fail(error) if options[:raise_errors] && !(response.parsed.is_a?(Hash) && response.parsed['access_token'])
       access_token_class.from_hash(self, response.parsed.merge(access_token_opts))
